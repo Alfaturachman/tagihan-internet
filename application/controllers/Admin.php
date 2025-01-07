@@ -37,7 +37,7 @@ class Admin extends CI_Controller
         $this->templating->load('admin/pelanggan', $data);
     }
 
-    public function tambah_pengguna()
+    public function tambah_pelanggan()
     {
         // Validasi form
         $this->form_validation->set_rules('nama_instansi', 'Nama Instansi', 'required');
@@ -56,7 +56,7 @@ class Admin extends CI_Controller
         } else {
             $this->model->tambah_pengguna();
             $this->session->set_flashdata('msg', 'ditambahkan.');
-            redirect('data-pengguna');
+            redirect('data-pelanggan');
         }
     }
 
@@ -68,7 +68,7 @@ class Admin extends CI_Controller
         // Jika data pengguna tidak ditemukan
         if (!$data['pengguna']) {
             $this->session->set_flashdata('msg', 'Pengguna tidak ditemukan.');
-            redirect('data-pengguna');
+            redirect('data-pelanggan');
         }
 
         // Validasi form
@@ -89,19 +89,34 @@ class Admin extends CI_Controller
             // Proses update data pengguna
             $this->model->updatePengguna($id);
             $this->session->set_flashdata('msg', 'diubah.');
-            redirect('data-pengguna');
+            redirect('data-pelanggan');
         }
     }
 
-    public function hapus_pengguna()
+    public function hapus_pengguna($id)
     {
-        // tangkap id
-        $id = $this->input->post('id');
-        $this->db->where('id', $id);
-        $this->db->delete('user');
-        $this->db->where('instansi_id', $id);
-        $this->db->delete('pengaduan');
-        $this->session->set_flashdata('msg', 'dihapus.');
-        redirect('data-pengguna');
+
+        // Debug: Log the received ID
+        log_message('debug', 'Received ID for deletion: ' . $id);
+
+        if ($id && is_numeric($id)) {
+            try {
+                // Hapus data dari tabel `user` 
+                $this->db->where('id', $id);
+                $result = $this->db->delete('user');
+
+                if ($result) {
+                    $this->session->set_flashdata('msg', 'Data pengguna berhasil dihapus.');
+                } else {
+                    $this->session->set_flashdata('msg', 'Gagal menghapus data pengguna.');
+                }
+            } catch (Exception $e) {
+                $this->session->set_flashdata('msg', 'Error: ' . $e->getMessage());
+            }
+        } else {
+            $this->session->set_flashdata('msg', 'ID tidak valid atau pengguna tidak ditemukan.');
+        }
+
+        redirect('data-pelanggan');
     }
 }

@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-12 d-flex justify-content-between">
             <h3 class="h3 mb-2 mt-1 text-gray-900"><i class="fa fa-fw fa-users"></i> <?= $judul; ?></h3>
-            <a href="<?= base_url('tambah-pengguna'); ?>" class="btn btn-primary mb-3">Tambah Pelanggan</a>
+            <a href="<?= base_url('tambah-pelanggan'); ?>" class="btn btn-primary mb-3">Tambah Pelanggan</a>
         </div>
     </div>
 
@@ -33,9 +33,11 @@
                                         <td><?= $p->username; ?></td>
                                         <td><?= $p->role; ?></td>
                                         <td>
-                                            <a href="<?= base_url('edit-pelanggan/' . $p->id); ?>" class="btn btn-sm btn-warning">Edit</a>
-
-                                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#hapusModal" data-id="<?= $p->id; ?>" data-nama="<?= $p->nama_instansi; ?>">Hapus</button>
+                                            <a href="<?= base_url('edit-pengguna/' . $p->id); ?>" class="btn btn-sm btn-warning">Edit</a>
+                                            <button type="button" class="btn btn-sm btn-danger"
+                                                onclick="confirmDelete('<?= base_url('admin/hapus_pengguna/' . $p->id); ?>')">
+                                                Hapus
+                                            </button>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -48,38 +50,36 @@
     </div>
 </div>
 
-<!-- Modal Hapus -->
-<div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="hapusModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header badge-danger">
-                <h5 class="modal-title" id="hapusModalLabel">Hapus Data Pelanggan</h5>
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body">
-                Apakah Anda yakin ingin menghapus data pelanggan <strong id="namaPelanggan"></strong>?
+                Apakah Anda yakin ingin menghapus pengguna ini?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <a href="#" id="btnHapusPelanggan" class="btn btn-danger">Hapus</a>
+                <a href="#" id="btn-delete" class="btn btn-danger">Hapus</a>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    $('#hapusModal').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget); // Tombol Hapus yang ditekan
-        var id = button.data('id'); // Mengambil ID pelanggan
-        var nama = button.data('nama'); // Mengambil nama pelanggan
+    function confirmDelete(deleteUrl) {
+        // Set the correct delete URL to the button
+        document.getElementById('btn-delete').href = deleteUrl;
 
-        // Set Nama Pelanggan di modal
-        var modal = $(this);
-        modal.find('#namaPelanggan').text(nama);
-        modal.find('#btnHapusPelanggan').attr('href', '<?= base_url('hapus-pelanggan/'); ?>' + id);
-    });
+        // Show the modal
+        var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        deleteModal.show();
+    }
 </script>
 
 <!-- Footer -->
