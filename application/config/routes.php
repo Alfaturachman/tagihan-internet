@@ -57,9 +57,13 @@ $route['translate_uri_dashes'] = FALSE;
 $route['data-pengaduan'] = 'menu/index';
 $route['tutorial_pembayaran'] = 'admin/tutorial_pembayaran';
 
-$route['data-pelanggan'] = 'admin/pelanggan';
+$route['data-pelanggan'] = 'admin/data_pelanggan';
 $route['tambah-pelanggan'] = 'admin/tambah_pelanggan';
 $route['edit-pelanggan/(:num)'] = 'admin/edit_pelanggan/$1';
+
+$route['data-langganan'] = 'langganan/data_langganan';
+$route['tambah-langganan'] = 'langganan/tambah_langganan';
+$route['edit-langganan/(:num)'] = 'langganan/edit_langganan/$1';
 
 $route['laporan-pengaduan'] = 'menu/laporan';
 

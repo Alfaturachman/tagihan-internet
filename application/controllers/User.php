@@ -7,8 +7,6 @@ class User extends CI_Controller
     {
         parent::__construct();
         $this->load->model('User_model', 'model');
-        $this->load->model('Laporan_model'); // Load model laporan
-        $this->load->library('pdf'); // Load library pdf
         is_logout();
         $this->user = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
     }

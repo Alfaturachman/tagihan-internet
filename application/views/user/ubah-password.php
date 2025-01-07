@@ -2,19 +2,17 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-            <!-- Flash data -->
-            <?php if ($this->session->flashdata('msg')) : ?>
+            <!-- <?php if ($this->session->flashdata('msg')) : ?>
                 <div class="alert alert-danger"><?= $this->session->flashdata('msg'); ?> </div>
-            <?php endif; ?>
+            <?php endif; ?> -->
 
             <?php if ($this->session->flashdata('ubahpass')) : ?>
                 <?= $this->session->flashdata('ubahpass'); ?>
-            <?php endif; ?>
+            <?php endif; ?> 
 
             <div class="card shadow-sm">
                 <div class="card-header bg-primary">
-                    <!-- Page Heading -->
-                    <h1 class="h3 text-white"><?= $judul; ?></h1>
+                    <h3 class="h3 text-white mt-2"><?= $judul; ?></h3>
                 </div>
                 <div class="card-body">
 

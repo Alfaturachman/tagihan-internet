@@ -23,14 +23,6 @@
 
   <?php if ($user['role_id'] == 1) : ?>
 
-    <!-- Menu Data Pengaduan -->
-    <li class="nav-item <?= current_url() == base_url('data-pengaduan') ? 'active' : '' ?>">
-      <a class="nav-link" href="<?= base_url('data-pengaduan'); ?>">
-        <i class="fas fa-fw fa-mobile"></i>
-        <span>Data Pengaduan</span>
-      </a>
-    </li>
-
     <!-- Menu Tutorial Pembayaran -->
     <li class="nav-item <?= current_url() == base_url('tutorial_pembayaran') ? 'active' : '' ?>">
       <a class="nav-link" href="<?= base_url('tutorial_pembayaran'); ?>">
@@ -44,6 +36,14 @@
       <a class="nav-link" href="<?= base_url('data-pelanggan'); ?>">
         <i class="fas fa-fw fa-users"></i>
         <span>Data Pelanggan</span>
+      </a>
+    </li>
+
+    <!-- Menu Data Langganan -->
+    <li class="nav-item <?= current_url() == base_url('data-langganan') ? 'active' : '' ?>">
+      <a class="nav-link" href="<?= base_url('data-langganan'); ?>">
+        <i class="fas fa-fw fa-server"></i>
+        <span>Data Langganan</span>
       </a>
     </li>
 
@@ -70,7 +70,7 @@
   <?php endif; ?>
 
   <!-- Ubah Password -->
-  <li class="nav-item">
+  <li class="nav-item <?= current_url() == base_url('ubah-password') ? 'active' : '' ?>">
     <a class="nav-link" href="<?= base_url('ubah-password'); ?>">
       <i class="fas fa-fw fa-key"></i>
       <span>Ubah Password</span></a>

@@ -1,41 +1,30 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Admin extends CI_Controller
+class Langganan extends CI_Controller
 {
     public function __construct()
     {
         parent::__construct();
         // Load Admin_model
-        $this->load->model('Admin_model', 'model');
+        $this->load->model('Langganan_model', 'model');
         is_logout();
         is_user();
         $this->user = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
     }
 
-    public function tutorial_pembayaran()
-    {
-        is_user();
-        $data = [
-            'judul' => 'Tutorial Pembayaran',
-            'user' => $this->user
-        ];
-
-        $this->templating->load('admin/tutorial_pembayaran', $data);
-    }
-
-    public function data_pelanggan()
+    public function data_langganan()
     {
         $data = [
-            'judul' => 'Data Pelanggan',
+            'judul' => 'Data Langganan',
             'user' => $this->user,
-            'pelanggan' => $this->model->getPelanggan()
+            'langganan' => $this->model->getLangganan()
         ];
 
-        $this->templating->load('admin/pelanggan', $data);
+        $this->templating->load('langganan/data_langganan', $data);
     }
 
-    public function tambah_pelanggan()
+    public function tambah_langganan()
     {
         // Validasi form
         $this->form_validation->set_rules('nama_instansi', 'Nama Instansi', 'required');
@@ -47,24 +36,24 @@ class Admin extends CI_Controller
 
         if ($this->form_validation->run() == FALSE) {
             $data = [
-                'judul' => 'Tambah Pengguna',
+                'judul' => 'Tambah langganan',
                 'user' => $this->user
             ];
-            $this->templating->load('admin/tambah_pengguna', $data);
+            $this->templating->load('langganan/tambah_langganan', $data);
         } else {
-            $this->model->tambah_pengguna();
+            $this->model->tambah_langganan();
             $this->session->set_flashdata('msg', 'ditambahkan.');
             redirect('data-pelanggan');
         }
     }
 
-    public function edit_pelanggan($id)
+    public function edit_langganan($id)
     {
         $data['pengguna'] = $this->model->getPenggunaById($id);
 
         if (!$data['pengguna']) {
             $this->session->set_flashdata('msg', 'Pengguna tidak ditemukan.');
-            redirect('data-pelanggan');
+            redirect('data-langganan');
         }
 
         // Validasi form
@@ -85,11 +74,11 @@ class Admin extends CI_Controller
             // Proses update data pengguna
             $this->model->updatePengguna($id);
             $this->session->set_flashdata('msg', 'Data pengguna berhasil diubah.');
-            redirect('data-pelanggan');
+            redirect('data-langganan');
         }
     }
 
-    public function hapus_pengguna($id)
+    public function hapus_langganan($id)
     {
         if ($id && is_numeric($id)) {
             try { 
@@ -97,15 +86,15 @@ class Admin extends CI_Controller
                 $result = $this->db->delete('user');
 
                 if ($result) {
-                    $this->session->set_flashdata('msg', 'Data pengguna berhasil dihapus.');
+                    $this->session->set_flashdata('msg', 'Data langganan berhasil dihapus.');
                 } else {
-                    $this->session->set_flashdata('msg', 'Gagal menghapus data pengguna.');
+                    $this->session->set_flashdata('msg', 'Gagal menghapus data langganan.');
                 }
             } catch (Exception $e) {
                 $this->session->set_flashdata('msg', 'Error: ' . $e->getMessage());
             }
         } else {
-            $this->session->set_flashdata('msg', 'ID tidak valid atau pengguna tidak ditemukan.');
+            $this->session->set_flashdata('msg', 'ID tidak valid atau langganan tidak ditemukan.');
         }
 
         redirect('data-pelanggan');
