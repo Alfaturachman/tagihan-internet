@@ -33,7 +33,7 @@
                                         <td><?= $p->username; ?></td>
                                         <td><?= $p->role; ?></td>
                                         <td>
-                                            <a href="<?= base_url('edit-pengguna/' . $p->id); ?>" class="btn btn-sm btn-warning">Edit</a>
+                                            <a href="<?= base_url('edit-pelanggan/' . $p->id); ?>" class="btn btn-sm btn-warning">Edit</a>
                                             <button type="button" class="btn btn-sm btn-danger"
                                                 onclick="confirmDelete('<?= base_url('admin/hapus_pengguna/' . $p->id); ?>')">
                                                 Hapus

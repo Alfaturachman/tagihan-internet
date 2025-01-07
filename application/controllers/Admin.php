@@ -60,7 +60,7 @@ class Admin extends CI_Controller
         }
     }
 
-    public function edit_pengguna($id)
+    public function edit_pelanggan($id)
     {
         // Ambil data pengguna berdasarkan ID
         $data['pengguna'] = $this->model->getPenggunaById($id);

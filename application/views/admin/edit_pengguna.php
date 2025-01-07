@@ -6,8 +6,7 @@
                     <h3 class="mt-2"><?= $judul; ?></h3>
                 </div>
                 <div class="card-body">
-                    <h2 class="mt-4"><?= $judul; ?></h2>
-                    <form action="<?= base_url('admin/edit_pengguna/' . $pengguna['id']); ?>" method="post">
+                    <form action="<?= base_url('admin/edit_pelanggan/' . $pengguna['id']); ?>" method="post">
                         <div class="form-group">
                             <label for="nama_instansi">Nama Instansi</label>
                             <input type="text" class="form-control" id="nama_instansi" name="nama_instansi" value="<?= set_value('nama_instansi', $pengguna['nama_instansi']); ?>">

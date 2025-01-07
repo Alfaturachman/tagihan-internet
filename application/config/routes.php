@@ -58,9 +58,8 @@ $route['data-pengaduan'] = 'menu/index';
 $route['tutorial_pembayaran'] = 'admin/tutorial_pembayaran';
 
 $route['data-pelanggan'] = 'admin/pelanggan';
-$route['tambah-pelanggan'] = 'admin/tambah_pengguna';
-$route['edit-pengguna/(:num)'] = 'admin/edit_pengguna/$1';
-$route['admin/hapus_pengguna'] = 'admin/hapus_pengguna';
+$route['tambah-pelanggan'] = 'admin/tambah_pelanggan';
+$route['edit-pelanggan/(:num)'] = 'admin/edit_pelanggan/$1';
 
 $route['laporan-pengaduan'] = 'menu/laporan';
 
