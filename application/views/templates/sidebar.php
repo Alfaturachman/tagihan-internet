@@ -55,7 +55,19 @@
       </a>
     </li>
 
-<?php endif; ?>
+  <?php endif; ?>
+
+  <?php if ($user['role_id'] == 2) : ?>
+
+    <!-- Menu Tutorial Pembayaran -->
+    <li class="nav-item <?= current_url() == base_url('tutorial_pembayaran') ? 'active' : '' ?>">
+      <a class="nav-link" href="<?= base_url('tutorial_pembayaran'); ?>">
+        <i class="fas fa-fw fa-mobile"></i>
+        <span>Tutorial Pembayaran</span>
+      </a>
+    </li>
+
+  <?php endif; ?>
 
   <!-- Ubah Password -->
   <li class="nav-item">

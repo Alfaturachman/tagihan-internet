@@ -1,10 +1,7 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
-
     <div class="row">
         <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-
             <!-- Flash data -->
             <?php if ($this->session->flashdata('msg')) : ?>
                 <div class="alert alert-danger"><?= $this->session->flashdata('msg'); ?> </div>
@@ -55,7 +52,6 @@
             </div>
         </div>
     </div>
-
 </div>
 <!-- /.container-fluid -->
 

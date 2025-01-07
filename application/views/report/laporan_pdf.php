@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html><head>
+<html>
+
+<head>
     <title>Cetak Laporan Pembayaran</title>
     <style>
         body {
@@ -22,15 +24,18 @@
             text-align: center;
         }
 
-        table, th, td {
+        table,
+        th,
+        td {
             border: 1px solid black;
         }
-
     </style>
-</head><body>
-    
+</head>
+
+<body>
+
     <h2>Daftar Laporan Pengaduan</h2>
-    
+
     <div class="cetak">
         Tanggal di cetak: <?= date('d/m/Y'); ?>
     </div>
@@ -45,18 +50,20 @@
         </tr>
 
         <?php if (!empty($data)) : ?>
-        <?php foreach($data as $num => $row) : ?>
-        <tr>
-            <td style="width: 6%"><?= $num+1 ?></td>
-            <td style="width: 20%"><?= $row['judul_pengaduan']; ?></td>
-            <td style="width: 40%"><?= $row['isi_pengaduan']; ?></td>
-            <td style="width: 14%"><?= $row['tgl_pengaduan']; ?></td>
-            <td style="width: 20%"><?= $row['nama_instansi']; ?></td>
-        </tr>
-        <?php endforeach; ?>
-    <?php else : ?>
-        <h3>Tidak ada data!</h3>
-    <?php endif; ?>
+            <?php foreach ($data as $num => $row) : ?>
+                <tr>
+                    <td style="width: 6%"><?= $num + 1 ?></td>
+                    <td style="width: 20%"><?= $row['judul_pengaduan']; ?></td>
+                    <td style="width: 40%"><?= $row['isi_pengaduan']; ?></td>
+                    <td style="width: 14%"><?= $row['tgl_pengaduan']; ?></td>
+                    <td style="width: 20%"><?= $row['nama_instansi']; ?></td>
+                </tr>
+            <?php endforeach; ?>
+        <?php else : ?>
+            <h3>Tidak ada data!</h3>
+        <?php endif; ?>
     </table>
 
-</body></html>
+</body>
+
+</html>

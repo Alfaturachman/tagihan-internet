@@ -1,24 +1,26 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Menu extends CI_Controller {
+class Menu extends CI_Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->load->model('M_pembayaran');
     }
 
-    public function detail_pembayaran($id) {
+    public function detail_pembayaran($id)
+    {
         $data['pembayaran'] = $this->M_pembayaran->get_pembayaran_by_id($id);
-        // ... kode lainnya untuk menampilkan view ...
     }
 
-    public function simpan_pembayaran() {
+    public function simpan_pembayaran()
+    {
         $data = array(
             'id_permohonan' => $this->input->post('id_permohonan'),
             'nama' => $this->input->post('nama'),
             'email' => $this->input->post('email'),
-            // ... field lainnya
         );
 
         $this->M_pembayaran->insert_pembayaran($data);

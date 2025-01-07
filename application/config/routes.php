@@ -63,7 +63,7 @@ $route['edit-pelanggan/(:num)'] = 'admin/edit_pelanggan/$1';
 
 $route['laporan-pengaduan'] = 'menu/laporan';
 
-$route['daftar-pengaduan'] = 'user/read_data';
+$route['daftar-pengaduan'] = 'user/read_data_pelanggan';
 $route['tambah-pengaduan'] = 'user/tambah_data';
 $route['ubah-password'] = 'user/ubah_password';
 

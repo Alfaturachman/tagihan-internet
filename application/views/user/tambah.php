@@ -1,11 +1,6 @@
-<!-- Begin Page Content -->
 <div class="container-fluid">
-
-    <!-- .row -->
     <div class="row mt-4">
-        <!-- .col -->
         <div class="col-12">
-
             <?php if ($this->session->flashdata('msg')) : ?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -14,30 +9,22 @@
                     Pengaduan anda berhasil di <strong><?= $this->session->flashdata('msg'); ?></strong> Silahkan menunggu proses selanjutnya oleh tim terkait, terima kasih.
                 </div>
             <?php endif; ?>
-
         </div>
     </div>
-
 </div>
-<!-- /.container-fluid -->
 
 <div class="jumbotron jumbotron-fluid bg-dark my-2 mx-4">
-
     <div class="jumbotron-background">
         <img src="<?= base_url('assets/img/welcome_msg.svg'); ?>" class="blur">
     </div>
 
     <div class="container text-white">
-
         <h1 class="display-4">Selamat datang, <?= $user['username']; ?>!</h1>
         <p class="lead">Selamat datang di sistem pengaduan jaringan Diskominfo, silahkan adukan permasalahan jaringan anda kepada kami.</p>
         <hr class="my-4">
         <p>Klik tombol tambah pengaduan berikut untuk mengirimkan data pengaduan terkait permasalahan yang terjadi.</p>
         <button type="button" data-toggle="modal" data-target="#tambah-data" class="btn btn-primary btn-lg" role="button"><i class="fas fa-fw fa-plus"></i> Tambah Pengaduan</button>
-
     </div>
-    <!-- /.container -->
-
 </div>
 <!-- /.jumbotron -->
 

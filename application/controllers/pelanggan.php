@@ -1,11 +1,11 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Menu extends CI_Controller {
+class Menu extends CI_Controller
+{
 
-    // ... (kode lain di controller Anda)
-
-    public function read_data_pelanggan() {
+    public function read_data_pelanggan()
+    {
         $this->load->model('Pelanggan_model'); // Load model
 
         $list = $this->Pelanggan_model->get_datatables();
@@ -16,7 +16,7 @@ class Menu extends CI_Controller {
             $row = array();
             $row[] = $pelanggan->nama_pelanggan;
             $row[] = $pelanggan->alamat;
-            $row[] = $pelanggan->id_pelanggan; // Pastikan ini ada di database
+            $row[] = $pelanggan->id_pelanggan;
             $row[] = $pelanggan->tanggal_pembayaran;
             $row[] = $pelanggan->paket_layanan;
             $row[] = $pelanggan->jumlah_tagihan;

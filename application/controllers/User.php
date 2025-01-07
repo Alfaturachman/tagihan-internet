@@ -49,7 +49,90 @@ class User extends CI_Controller
                 $this->templating->load('laporan/laporan_view', $data);
             }
         } else {
-            redirect('user/laporan_pembayaran'); // Redirect ke halaman form laporan
+            redirect('user/laporan_pembayaran');
+        }
+    }
+
+    public function read_data()
+    {
+        is_admin();
+        $data = [
+            'judul' => 'Daftar Pengaduan',
+            'user' => $this->user,
+            'data' => $this->model->getData()
+        ];
+        $this->templating->load('user/pengaduan', $data);
+    }
+
+    public function ubah_data()
+    {
+        if (isset($_POST['ubah-data'])) {
+            $this->model->ubah_data();
+        } else {
+            redirect('auth/notfound');
+        }
+    }
+
+    public function tambah_data()
+    {
+        is_admin();
+        $data = [
+            'judul' => 'Tambah Pengaduan',
+            'user' => $this->user
+        ];
+
+        $this->templating->load('user/tambah', $data);
+    }
+
+    public function tambah_data_aksi()
+    {
+        if ($this->input->is_ajax_request() == true) {
+            $this->form_validation->set_rules('judul_pengaduan', 'Judul pengaduan', 'required|max_length[255]');
+            $this->form_validation->set_rules('isi_pengaduan', 'Isi pengaduan', 'required');
+            $this->form_validation->set_rules('alamat', 'Alamat', 'required|max_length[255]');
+            $this->form_validation->set_rules('no_hp', 'Nomor Telepon', 'required|numeric|max_length[20]');
+
+            $this->form_validation->set_error_delimiters('', '');
+
+            if ($this->form_validation->run() == false) {
+                $errors = [
+                    'judul_pengaduan' => form_error('judul_pengaduan'),
+                    'isi_pengaduan' => form_error('isi_pengaduan'),
+                    'alamat' => form_error('alamat'),
+                    'no_hp' => form_error('no_hp'),
+                ];
+
+                $data = [
+                    'status' => false,
+                    'errors' => $errors
+                ];
+
+                $this->output->set_content_type('application/json')->set_output(json_encode($data));
+            } else {
+                $this->model->tambah_data();
+                $data['status'] = true;
+                $this->output->set_content_type('application/json')->set_output(json_encode($data));
+            }
+        } else {
+            redirect('tambah-pengaduan');
+        }
+    }
+
+    public function ubah_password()
+    {
+        $data = [
+            'user' => $this->user,
+            'judul' => 'Ubah Password'
+        ];
+
+        $this->form_validation->set_rules('password', 'Password Lama', 'required');
+        $this->form_validation->set_rules('newpass', 'Password Baru', 'required|min_length[8]');
+        $this->form_validation->set_rules('newpass2', 'Konfirmasi Password', 'required|matches[newpass]');
+
+        if ($this->form_validation->run() == false) {
+            $this->templating->load('user/ubah-password', $data);
+        } else {
+            $this->model->ubah_password();
         }
     }
 }
