@@ -74,6 +74,7 @@ $route['daftar-pengaduan'] = 'user/read_data_pelanggan';
 $route['tambah-pengaduan'] = 'user/tambah_data';
 $route['ubah-password'] = 'user/ubah_password';
 
+$route['cetak-invoice/(:num)'] = 'Report/invoiceById/$1';
 $route['laporan-pengaduan'] = 'menu/laporan';
 
 $route['notfound'] = 'auth/notfound';

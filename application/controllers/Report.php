@@ -14,7 +14,7 @@ class Report extends CI_Controller
         $this->load->model('Invoice_model');
     }
 
-    public function generate_pdf($invoice_id)
+    public function invoiceById($invoice_id)
     {
         // Validasi ID Invoice
         if (!$invoice_id) {
