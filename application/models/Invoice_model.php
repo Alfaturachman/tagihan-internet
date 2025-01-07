@@ -18,6 +18,24 @@ class Invoice_model extends CI_Model
         }
     }
 
+    public function getInvoiceById($id)
+    {
+        $this->db->select('invoice.*, paket_layanan.nama_paket');
+        $this->db->from('invoice');
+        $this->db->join('paket_layanan', 'invoice.id_langganan = paket_layanan.id');
+        $this->db->where('invoice.id', $id);
+        $query = $this->db->get();
+        return $query->row();
+    }
+
+    public function getPembayaranByInvoiceId($invoice_id)
+    {
+        $this->db->from('pembayaran');
+        $this->db->where('id_invoice', $invoice_id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     // Fungsi untuk mengambil nama instansi berdasarkan id_user
     public function get_instansi_name($id_user)
     {

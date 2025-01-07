@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Cetak Laporan Pembayaran</title>
+    <title>Cetak Invoice</title>
     <style>
         body {
             font-family: arial, sans-serif;
@@ -34,7 +34,7 @@
 
 <body>
 
-    <h2>Daftar Laporan Pengaduan</h2>
+    <h2>Invoice #<?= $invoice->invoice; ?></h2>
 
     <div class="cetak">
         Tanggal di cetak: <?= date('d/m/Y'); ?>
@@ -43,24 +43,48 @@
     <table>
         <tr>
             <th style="width: 6%">No.</th>
-            <th style="width: 20%">Judul</th>
-            <th style="width: 40%">Isi</th>
-            <th style="width: 14%">Tanggal Pengaduan</th>
-            <th style="width: 20%">Nama Instansi</th>
+            <th style="width: 20%">Nama Paket</th>
+            <th style="width: 20%">Tanggal Invoice</th>
+            <th style="width: 20%">Total Harga</th>
+            <th style="width: 20%">Status</th>
+            <th style="width: 14%">Tanggal Bayar</th>
         </tr>
 
-        <?php if (!empty($data)) : ?>
-            <?php foreach ($data as $num => $row) : ?>
+        <tr>
+            <td style="width: 6%">1</td>
+            <td style="width: 20%"><?= $invoice->nama_paket; ?></td>
+            <td style="width: 20%"><?= $invoice->tanggal_invoice; ?></td>
+            <td style="width: 20%">Rp. <?= number_format($invoice->total_harga, 0, ',', '.'); ?></td>
+            <td style="width: 20%"><?= $invoice->status; ?></td>
+            <td style="width: 14%"><?= $invoice->tanggal_bayar ? $invoice->tanggal_bayar : '-'; ?></td>
+        </tr>
+    </table>
+
+    <h3>Detail Pembayaran</h3>
+
+    <table>
+        <tr>
+            <th style="width: 10%">No.</th>
+            <th style="width: 30%">Metode Pembayaran</th>
+            <th style="width: 20%">Total Bayar</th>
+            <th style="width: 20%">Tanggal Bayar</th>
+            <th style="width: 20%">Bukti Pembayaran</th>
+        </tr>
+
+        <?php if (!empty($pembayaran)) : ?>
+            <?php foreach ($pembayaran as $num => $payment) : ?>
                 <tr>
-                    <td style="width: 6%"><?= $num + 1 ?></td>
-                    <td style="width: 20%"><?= $row['judul_pengaduan']; ?></td>
-                    <td style="width: 40%"><?= $row['isi_pengaduan']; ?></td>
-                    <td style="width: 14%"><?= $row['tgl_pengaduan']; ?></td>
-                    <td style="width: 20%"><?= $row['nama_instansi']; ?></td>
+                    <td style="width: 10%"><?= $num + 1 ?></td>
+                    <td style="width: 30%"><?= $payment->metode_pembayaran; ?></td>
+                    <td style="width: 20%">Rp. <?= number_format($payment->total_bayar, 0, ',', '.'); ?></td>
+                    <td style="width: 20%"><?= $payment->tanggal_bayar; ?></td>
+                    <td style="width: 20%"><a href="<?= base_url('uploads/' . $payment->upload_bukti); ?>" target="_blank">Lihat Bukti</a></td>
                 </tr>
             <?php endforeach; ?>
         <?php else : ?>
-            <h3>Tidak ada data!</h3>
+            <tr>
+                <td colspan="5">Belum ada pembayaran untuk invoice ini.</td>
+            </tr>
         <?php endif; ?>
     </table>
 
