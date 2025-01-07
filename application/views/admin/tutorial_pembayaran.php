@@ -3,7 +3,7 @@
         <div class="col">
             <div class="card shadow-sm">
                 <div class="card-header badge-primary">
-                    <h3 class="h3 text-white m-0">Tutorial Pembayaran Layanan WiFi</h3>
+                    <h4 class="h4 text-white m-0">Tutorial Pembayaran Layanan WiFi</h4>
                 </div>
                 <div class="card-body">
                     <p>Berikut adalah langkah-langkah untuk melakukan pembayaran layanan WiFi:</p>

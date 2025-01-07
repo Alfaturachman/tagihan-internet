@@ -64,11 +64,16 @@ $route['edit-pelanggan/(:num)'] = 'admin/edit_pelanggan/$1';
 $route['data-langganan'] = 'langganan/data_langganan';
 $route['tambah-langganan'] = 'langganan/tambah_langganan';
 $route['edit-langganan/(:num)'] = 'langganan/edit_langganan/$1';
+$route['hapus-langganan/(:num)'] = 'langganan/hapus_langganan/$1';
 
-$route['laporan-pengaduan'] = 'menu/laporan';
+$route['data-invoice'] = 'invoice/data_invoice';
+$route['edit-invoice/(:num)'] = 'invoice/edit_invoice/$1';
+$route['hapus-invoice/(:num)'] = 'invoice/hapus_invoice/$1';
 
 $route['daftar-pengaduan'] = 'user/read_data_pelanggan';
 $route['tambah-pengaduan'] = 'user/tambah_data';
 $route['ubah-password'] = 'user/ubah_password';
+
+$route['laporan-pengaduan'] = 'menu/laporan';
 
 $route['notfound'] = 'auth/notfound';

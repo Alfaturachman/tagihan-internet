@@ -26,24 +26,55 @@ class Langganan extends CI_Controller
 
     public function tambah_langganan()
     {
-        // Validasi form
-        $this->form_validation->set_rules('nama_instansi', 'Nama Instansi', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[user.email]');
-        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
-        $this->form_validation->set_rules('username', 'Username', 'required|is_unique[user.username]');
-        $this->form_validation->set_rules('password', 'Password', 'required|min_length[8]');
-        $this->form_validation->set_rules('confirm_password', 'Konfirmasi Password', 'required|matches[password]');
+        $data['judul'] = 'Tambah Langganan';
+        $this->db->where('role_id', 2);
+        $data['user'] = $this->db->get('user')->result();
 
-        if ($this->form_validation->run() == FALSE) {
-            $data = [
-                'judul' => 'Tambah langganan',
-                'user' => $this->user
-            ];
+        // Ambil data paket layanan
+        $data['paket_layanan'] = $this->db->get('paket_layanan')->result();
+
+        $this->form_validation->set_rules('id_user', 'Pilih Pengguna', 'required');
+        $this->form_validation->set_rules('id_paket_layanan', 'Pilih Paket Layanan', 'required');
+        $this->form_validation->set_rules('tanggal_mulai', 'Tanggal Mulai', 'required');
+        $this->form_validation->set_rules('tanggal_berakhir', 'Tanggal Berakhir', 'required');
+        $this->form_validation->set_rules('status', 'Status', 'required');
+
+        if ($this->form_validation->run() === FALSE) {
             $this->templating->load('langganan/tambah_langganan', $data);
         } else {
-            $this->model->tambah_langganan();
-            $this->session->set_flashdata('msg', 'ditambahkan.');
-            redirect('data-pelanggan');
+            // Simpan langganan ke dalam database
+            $data_insert = [
+                'id_user' => $this->input->post('id_user'),
+                'id_paket_layanan' => $this->input->post('id_paket_layanan'),
+                'tanggal_mulai' => $this->input->post('tanggal_mulai'),
+                'tanggal_berakhir' => $this->input->post('tanggal_berakhir'),
+                'status' => $this->input->post('status')
+            ];
+
+            // Insert langganan
+            $this->db->insert('langganan', $data_insert);
+            $langganan_id = $this->db->insert_id();
+
+            // Ambil harga paket
+            $paket = $this->db->get_where('paket_layanan', ['id' => $this->input->post('id_paket_layanan')])->row();
+            $total_harga = $paket->harga_paket;
+
+            // Data invoice
+            $invoice_data = [
+                'id_langganan' => $langganan_id,
+                'invoice' => 'INV-' . strtoupper(uniqid()),  // Generate invoice code
+                'tanggal_invoice' => date('Y-m-d'),
+                'total_harga' => $total_harga,
+                'status' => 'Belum Bayar',
+                'tanggal_bayar' => NULL
+            ];
+
+            // Insert invoice
+            $this->db->insert('invoice', $invoice_data);
+
+            // Set flash message and redirect
+            $this->session->set_flashdata('message', 'Langganan dan Invoice berhasil ditambahkan!');
+            redirect('data-langganan');
         }
     }
 
@@ -80,23 +111,28 @@ class Langganan extends CI_Controller
 
     public function hapus_langganan($id)
     {
-        if ($id && is_numeric($id)) {
-            try { 
-                $this->db->where('id', $id);
-                $result = $this->db->delete('user');
+        // Mulai transaksi untuk memastikan konsistensi data
+        $this->db->trans_start();
 
-                if ($result) {
-                    $this->session->set_flashdata('msg', 'Data langganan berhasil dihapus.');
-                } else {
-                    $this->session->set_flashdata('msg', 'Gagal menghapus data langganan.');
-                }
-            } catch (Exception $e) {
-                $this->session->set_flashdata('msg', 'Error: ' . $e->getMessage());
-            }
+        // Hapus data invoice terkait dengan langganan
+        $this->db->delete('invoice', ['id_langganan' => $id]);
+
+        // Hapus langganan
+        $this->db->delete('langganan', ['id' => $id]);
+
+        // Commit transaksi
+        $this->db->trans_complete();
+
+        // Cek apakah transaksi berhasil
+        if ($this->db->trans_status() === FALSE) {
+            // Jika transaksi gagal, beri flash message error
+            $this->session->set_flashdata('message', 'Gagal menghapus langganan!');
         } else {
-            $this->session->set_flashdata('msg', 'ID tidak valid atau langganan tidak ditemukan.');
+            // Jika transaksi berhasil, beri flash message sukses
+            $this->session->set_flashdata('message', 'Langganan berhasil dihapus!');
         }
 
-        redirect('data-pelanggan');
+        // Redirect ke halaman data langganan
+        redirect('data-langganan');
     }
 }

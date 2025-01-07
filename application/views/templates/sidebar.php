@@ -21,7 +21,7 @@
     Menu
   </div>
 
-  <?php if ($user['role_id'] == 1) : ?>
+  <?php if ($this->session->userdata('role_id') == 1) : ?>
 
     <!-- Menu Tutorial Pembayaran -->
     <li class="nav-item <?= current_url() == base_url('tutorial_pembayaran') ? 'active' : '' ?>">
@@ -47,23 +47,19 @@
       </a>
     </li>
 
+    <!-- Menu Data Invoice -->
+    <li class="nav-item <?= current_url() == base_url('data-invoice') ? 'active' : '' ?>">
+      <a class="nav-link" href="<?= base_url('data-invoice'); ?>">
+        <i class="fas fa-fw fa-file-invoice"></i>
+        <span>Data Invoice</span>
+      </a>
+    </li>
+
     <!-- Menu Cetak Laporan -->
     <li class="nav-item <?= current_url() == base_url('laporan-pengaduan') ? 'active' : '' ?>">
       <a class="nav-link" href="<?= base_url('laporan-pengaduan'); ?>">
         <i class="fas fa-fw fa-print"></i>
         <span>Cetak Laporan</span>
-      </a>
-    </li>
-
-  <?php endif; ?>
-
-  <?php if ($user['role_id'] == 2) : ?>
-
-    <!-- Menu Tutorial Pembayaran -->
-    <li class="nav-item <?= current_url() == base_url('tutorial_pembayaran') ? 'active' : '' ?>">
-      <a class="nav-link" href="<?= base_url('tutorial_pembayaran'); ?>">
-        <i class="fas fa-fw fa-mobile"></i>
-        <span>Tutorial Pembayaran</span>
       </a>
     </li>
 

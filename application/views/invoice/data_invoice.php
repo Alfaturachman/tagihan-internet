@@ -1,8 +1,7 @@
-<div class="container-fluid">
+<div class="container-fluid mb-4">
     <div class="row">
         <div class="col-12 d-flex justify-content-between">
-            <h4 class="h4 mb-2 mt-1 text-gray-900"><i class="fa fa-fw fa-users"></i> <?= $judul; ?></h4>
-            <a href="<?= base_url('tambah-pelanggan'); ?>" class="btn btn-primary mb-3">Tambah Pelanggan</a>
+            <h4 class="h4 mb-2 mt-1 text-gray-900"><i class="fa fa-fw fa-file-invoice"></i> <?= $judul; ?></h4>
         </div>
     </div>
 
@@ -11,33 +10,39 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="table-pelanggan" class="table table-striped display" style="width: 100%;">
+                        <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID Pelanggan</th>
+                                    <th>#</th>
+                                    <th>Invoice</th>
+                                    <th>Tanggal Invoice</th>
+                                    <th>Total Harga</th>
+                                    <th>Status</th>
                                     <th>Nama Instansi</th>
-                                    <th>Email</th>
-                                    <th>Alamat</th>
-                                    <th>Username</th>
-                                    <th>Role</th>
+                                    <th>Nama Paket</th>
+                                    <th>Tanggal Mulai</th>
+                                    <th>Tanggal Berakhir</th>
+                                    <th>Metode Pembayaran</th>
+                                    <th>Upload Bukti</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($pelanggan as $p) : ?>
+                                <?php foreach ($invoice as $index => $invoice_item): ?>
                                     <tr>
-                                        <td><?= $p->id; ?></td>
-                                        <td><?= $p->nama_instansi; ?></td>
-                                        <td><?= $p->email; ?></td>
-                                        <td><?= $p->alamat; ?></td>
-                                        <td><?= $p->username; ?></td>
-                                        <td><?= $p->role; ?></td>
+                                        <td><?= $index + 1; ?></td>
+                                        <td><?= $invoice_item->invoice; ?></td>
+                                        <td><?= $invoice_item->tanggal_invoice; ?></td>
+                                        <td>Rp. <?= number_format($invoice_item->total_harga, 0, ',', '.'); ?></td>
+                                        <td><?= $invoice_item->status; ?></td>
+                                        <td><?= $invoice_item->id_user ? $this->model->get_instansi_name($invoice_item->id_user) : '-'; ?></td>
+                                        <td><?= $invoice_item->nama_paket; ?></td>
+                                        <td><?= $invoice_item->tanggal_mulai; ?></td>
+                                        <td><?= $invoice_item->tanggal_berakhir; ?></td>
+                                        <td><?= $invoice_item->id_user ? $this->model->get_metode_pembayaran($invoice_item->id) : '-'; ?></td>
+                                        <td><?= $invoice_item->id_user ? $this->model->get_upload_bukti($invoice_item->id) : '-'; ?></td>
                                         <td>
-                                            <a href="<?= base_url('edit-pelanggan/' . $p->id); ?>" class="btn btn-sm btn-warning">Edit</a>
-                                            <button type="button" class="btn btn-sm btn-danger"
-                                                onclick="confirmDelete('<?= base_url('admin/hapus_pengguna/' . $p->id); ?>')">
-                                                Hapus
-                                            </button>
+                                            <a href="<?= base_url('edit-invoice/' . $invoice_item->id); ?>" class="btn btn-warning btn-sm">Edit</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -49,6 +54,13 @@
         </div>
     </div>
 </div>
+
+<!-- Include JS untuk DataTables -->
+<script>
+    $(document).ready(function() {
+        $('#table-langganan').DataTable();
+    });
+</script>
 
 <!-- Delete Confirmation Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">

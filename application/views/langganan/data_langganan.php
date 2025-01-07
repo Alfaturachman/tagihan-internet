@@ -1,7 +1,7 @@
-<div class="container-fluid">
+<div class="container-fluid mb-4">
     <div class="row">
         <div class="col-12 d-flex justify-content-between">
-            <h3 class="h3 mb-2 mt-1 text-gray-900"><i class="fa fa-fw fa-users"></i> <?= $judul; ?></h3>
+            <h4 class="h4 mb-2 mt-1 text-gray-900"><i class="fa fa-fw fa-server"></i> <?= $judul; ?></h4>
             <a href="<?= base_url('tambah-langganan'); ?>" class="btn btn-primary mb-3">Tambah Langganan</a>
         </div>
     </div>

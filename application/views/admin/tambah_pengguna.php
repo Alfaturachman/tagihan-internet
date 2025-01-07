@@ -3,7 +3,7 @@
         <div class="col">
             <div class="card shadow-sm">
                 <div class="card-header badge-primary">
-                    <h3 class="mt-2"><?= $judul; ?></h3>
+                    <h4 class="mt-2"><?= $judul; ?></h4>
                 </div>
                 <div class="card-body">
                     <form action="<?= base_url('admin/tambah_pelanggan'); ?>" method="post">
