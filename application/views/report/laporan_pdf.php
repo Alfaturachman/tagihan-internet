@@ -12,7 +12,6 @@
         h2 {
             margin-top: auto;
             text-align: center;
-            position: fixed;
             left: 0px;
             right: 0px;
         }
@@ -47,7 +46,6 @@
             <th style="width: 20%">Tanggal Invoice</th>
             <th style="width: 20%">Total Harga</th>
             <th style="width: 20%">Status</th>
-            <th style="width: 14%">Tanggal Bayar</th>
         </tr>
 
         <tr>
@@ -56,7 +54,6 @@
             <td style="width: 20%"><?= $invoice->tanggal_invoice; ?></td>
             <td style="width: 20%">Rp. <?= number_format($invoice->total_harga, 0, ',', '.'); ?></td>
             <td style="width: 20%"><?= $invoice->status; ?></td>
-            <td style="width: 14%"><?= $invoice->tanggal_bayar ? $invoice->tanggal_bayar : '-'; ?></td>
         </tr>
     </table>
 
