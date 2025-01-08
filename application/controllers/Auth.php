@@ -45,9 +45,9 @@ class Auth extends CI_Controller
                 // redirect (bisa juga redirect menurut role)
                 $this->session->set_flashdata('message',  $data['username']);
                 if ($user['role_id'] == 1) {
-                    redirect('data-pengaduan');
+                    redirect('dashboard-admin');
                 } else {
-                    redirect('tambah-pengaduan');
+                    redirect('dashboard-pelanggan');
                 }
             } else {
                 // Jika password salah

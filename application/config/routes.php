@@ -54,6 +54,9 @@ $route['default_controller'] = 'auth';
 $route['404_override'] = 'auth/notfound';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['dashboard-admin'] = 'dashboard/admin';
+$route['dashboard-pelanggan'] = 'dashboard/pelanggan';
+
 $route['data-pengaduan'] = 'menu/index';
 $route['tutorial_pembayaran'] = 'admin/tutorial_pembayaran';
 

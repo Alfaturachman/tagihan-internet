@@ -92,7 +92,7 @@ class Admin extends CI_Controller
     public function hapus_pengguna($id)
     {
         if ($id && is_numeric($id)) {
-            try { 
+            try {
                 $this->db->where('id', $id);
                 $result = $this->db->delete('user');
 

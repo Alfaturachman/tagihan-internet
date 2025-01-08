@@ -23,6 +23,14 @@
 
   <?php if ($this->session->userdata('role_id') == 1) : ?>
 
+    <!-- Menu Dashboard -->
+    <li class="nav-item <?= current_url() == base_url('dashboard-admin') ? 'active' : '' ?>">
+      <a class="nav-link" href="<?= base_url('dashboard-admin'); ?>">
+        <i class="fas fa-fw fa-mobile"></i>
+        <span>Dashboard</span>
+      </a>
+    </li>
+
     <!-- Menu Tutorial Pembayaran -->
     <li class="nav-item <?= current_url() == base_url('tutorial_pembayaran') ? 'active' : '' ?>">
       <a class="nav-link" href="<?= base_url('tutorial_pembayaran'); ?>">
@@ -60,6 +68,18 @@
       <a class="nav-link" href="<?= base_url('laporan-pengaduan'); ?>">
         <i class="fas fa-fw fa-print"></i>
         <span>Cetak Laporan</span>
+      </a>
+    </li>
+
+  <?php endif; ?>
+
+  <?php if ($this->session->userdata('role_id') == 2) : ?>
+
+    <!-- Menu Dashboard -->
+    <li class="nav-item <?= current_url() == base_url('dashboard-pelanggan') ? 'active' : '' ?>">
+      <a class="nav-link" href="<?= base_url('dashboard-pelanggan'); ?>">
+        <i class="fas fa-fw fa-mobile"></i>
+        <span>Dashboard</span>
       </a>
     </li>
 
