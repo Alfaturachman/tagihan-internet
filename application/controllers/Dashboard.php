@@ -41,19 +41,15 @@ class Dashboard extends CI_Controller
             redirect('auth');
         }
 
-        // Load model yang dibutuhkan
-        $this->load->model('Langganan_model');
-        $this->load->model('Invoice_model');
-
         // Ambil ID user dari session
         $user_id = $this->session->userdata('id');
 
         $data = [
             'judul' => 'Dashboard Pelanggan',
-            'total_langganan_aktif' => $this->Langganan_model->getTotalLanggananByUser($user_id, 'Aktif'),
-            'total_invoice' => $this->Invoice_model->getTotalInvoiceByUser($user_id),
-            'total_bayar' => $this->Invoice_model->getTotalByStatusAndUser($user_id, 'Dibayar'),
-            'total_belum_bayar' => $this->Invoice_model->getTotalByStatusAndUser($user_id, 'Belum Bayar'),
+            'total_langganan_aktif' => $this->Dashboard_model->getTotalLanggananByUser($user_id, 'Aktif'),
+            'total_invoice' => $this->Dashboard_model->getTotalInvoiceByUser($user_id),
+            'total_bayar' => $this->Dashboard_model->getTotalByStatusAndUser($user_id, 'Dibayar'),
+            'total_belum_bayar' => $this->Dashboard_model->getTotalByStatusAndUser($user_id, 'Belum Bayar'),
         ];
 
         // Load view dengan template

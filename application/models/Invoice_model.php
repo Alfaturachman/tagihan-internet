@@ -69,4 +69,14 @@ class Invoice_model extends CI_Model
         $result = $query->row();
         return $result ? '<a href="' . base_url('uploads/' . $result->upload_bukti) . '" target="_blank">Lihat Bukti</a>' : '-';
     }
+
+    public function getInvoiceByUser($user_id)
+    {
+        $this->db->select('invoice.*, langganan.id_user');
+        $this->db->from('invoice');
+        $this->db->join('langganan', 'invoice.id_langganan = langganan.id', 'inner');
+        $this->db->where('langganan.id_user', $user_id);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }

@@ -23,4 +23,19 @@ class Invoice extends CI_Controller
 
         $this->templating->load('invoice/data_invoice', $data);
     }
+
+    public function data_tagihan()
+    {
+        // Ambil ID user dari session
+        $user_id = $this->session->userdata('user_id');
+
+        // Data yang dikirim ke view
+        $data = [
+            'judul' => 'Data Tagihan',
+            'user' => $this->user,
+            'invoice' => $this->model->getInvoiceByUser($user_id),
+        ];
+
+        $this->templating->load('invoice/data_invoice', $data);
+    }
 }

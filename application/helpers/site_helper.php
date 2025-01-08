@@ -7,11 +7,14 @@
 function is_login()
 {
     $ci = get_instance();
+
+    // Jika user sudah login
     if ($ci->session->userdata('username')) {
-        if ($ci->session->userdata('role_id') != 1) {
-            redirect('dashboard-pelanggan');
-        } else {
+        // Redirect sesuai role
+        if ($ci->session->userdata('role_id') == 1) {
             redirect('dashboard-admin');
+        } elseif ($ci->session->userdata('role_id') == 2) {
+            redirect('dashboard-pelanggan');
         }
     }
 }
@@ -36,17 +39,17 @@ function is_user()
 {
     $ci = get_instance();
 
-    // jika belum login
+    // Jika belum login, arahkan ke auth
     if (!$ci->session->userdata('username')) {
         redirect('auth');
-        // jika sudah login
-    } else {
-        // tapi bukan admin
-        if ($ci->session->userdata('role_id') != 1) {
-            redirect('notfound');
-        }
+    }
+
+    // Jika bukan role pelanggan (2), arahkan ke halaman notfound
+    if ($ci->session->userdata('role_id') != 2) {
+        redirect('notfound');
     }
 }
+
 
 /*
     function is_admin()
@@ -56,14 +59,13 @@ function is_admin()
 {
     $ci = get_instance();
 
-    // jika belum login
+    // Jika belum login, arahkan ke auth
     if (!$ci->session->userdata('username')) {
         redirect('auth');
-        // jika sudah login
-    } else {
-        // tapi bukan user biasa
-        if ($ci->session->userdata('role_id') != 2) {
-            redirect('notfound');
-        }
+    }
+
+    // Jika bukan role admin (1), arahkan ke halaman notfound
+    if ($ci->session->userdata('role_id') != 1) {
+        redirect('notfound');
     }
 }

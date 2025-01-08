@@ -63,13 +63,13 @@
       </a>
     </li>
 
-    <!-- Menu Cetak Laporan -->
+    {% comment %} <!-- Menu Cetak Laporan -->
     <li class="nav-item <?= current_url() == base_url('laporan-pengaduan') ? 'active' : '' ?>">
       <a class="nav-link" href="<?= base_url('laporan-pengaduan'); ?>">
         <i class="fas fa-fw fa-print"></i>
         <span>Cetak Laporan</span>
       </a>
-    </li>
+    </li> {% endcomment %}
 
   <?php endif; ?>
 
@@ -80,6 +80,14 @@
       <a class="nav-link" href="<?= base_url('dashboard-pelanggan'); ?>">
         <i class="fas fa-fw fa-mobile"></i>
         <span>Dashboard</span>
+      </a>
+    </li>
+
+    <!-- Menu Data Tagihan -->
+    <li class="nav-item <?= current_url() == base_url('data-tagihan') ? 'active' : '' ?>">
+      <a class="nav-link" href="<?= base_url('data-tagihan'); ?>">
+        <i class="fas fa-fw fa-file-invoice"></i>
+        <span>Data Tagihan</span>
       </a>
     </li>
 

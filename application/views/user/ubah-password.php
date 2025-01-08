@@ -8,7 +8,7 @@
 
             <?php if ($this->session->flashdata('ubahpass')) : ?>
                 <?= $this->session->flashdata('ubahpass'); ?>
-            <?php endif; ?> 
+            <?php endif; ?>
 
             <div class="card shadow-sm">
                 <div class="card-header bg-primary">

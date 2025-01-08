@@ -73,11 +73,13 @@ $route['data-invoice'] = 'invoice/data_invoice';
 $route['edit-invoice/(:num)'] = 'invoice/edit_invoice/$1';
 $route['hapus-invoice/(:num)'] = 'invoice/hapus_invoice/$1';
 
-$route['daftar-pengaduan'] = 'user/read_data_pelanggan';
-$route['tambah-pengaduan'] = 'user/tambah_data';
+$route['data-tagihan'] = 'invoice/data_tagihan';
 $route['ubah-password'] = 'user/ubah_password';
 
 $route['cetak-invoice/(:num)'] = 'Report/invoiceById/$1';
 $route['laporan-pengaduan'] = 'menu/laporan';
+
+$route['daftar-pengaduan'] = 'user/read_data_pelanggan';
+$route['tambah-pengaduan'] = 'user/tambah_data';
 
 $route['notfound'] = 'auth/notfound';
