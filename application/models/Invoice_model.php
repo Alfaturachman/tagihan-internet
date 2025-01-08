@@ -72,9 +72,11 @@ class Invoice_model extends CI_Model
 
     public function getInvoiceByUser($user_id)
     {
-        $this->db->select('invoice.*, langganan.id_user');
+        $this->db->select('invoice.*, langganan.id_user, langganan.tanggal_mulai, langganan.tanggal_berakhir, user.nama_instansi, user.email, user.alamat, paket_layanan.nama_paket, paket_layanan.harga_paket');
         $this->db->from('invoice');
         $this->db->join('langganan', 'invoice.id_langganan = langganan.id', 'inner');
+        $this->db->join('user', 'langganan.id_user = user.id', 'inner');
+        $this->db->join('paket_layanan', 'langganan.id_paket_layanan = paket_layanan.id', 'inner');
         $this->db->where('langganan.id_user', $user_id);
         $query = $this->db->get();
         return $query->result_array();
