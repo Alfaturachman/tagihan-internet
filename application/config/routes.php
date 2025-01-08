@@ -74,6 +74,7 @@ $route['edit-invoice/(:num)'] = 'invoice/edit_invoice/$1';
 $route['hapus-invoice/(:num)'] = 'invoice/hapus_invoice/$1';
 
 $route['data-tagihan'] = 'invoice/data_tagihan';
+$route['detail-tagihan/(:num)'] = 'invoice/detail_tagihan/$1';
 $route['ubah-password'] = 'user/ubah_password';
 
 $route['cetak-invoice/(:num)'] = 'Report/invoiceById/$1';

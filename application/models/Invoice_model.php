@@ -18,15 +18,18 @@ class Invoice_model extends CI_Model
         }
     }
 
-    public function getInvoiceById($id)
+    public function getInvoiceById($invoice_id)
     {
-        $this->db->select('invoice.*, paket_layanan.nama_paket');
+        $this->db->select('invoice.*, langganan.id_user, langganan.tanggal_mulai, langganan.tanggal_berakhir, user.nama_instansi, user.email, user.alamat, paket_layanan.nama_paket AS paket_layanan, paket_layanan.harga_paket');
         $this->db->from('invoice');
-        $this->db->join('paket_layanan', 'invoice.id_langganan = paket_layanan.id');
-        $this->db->where('invoice.id', $id);
+        $this->db->join('langganan', 'invoice.id_langganan = langganan.id', 'inner');
+        $this->db->join('user', 'langganan.id_user = user.id', 'inner');
+        $this->db->join('paket_layanan', 'langganan.id_paket_layanan = paket_layanan.id', 'inner');
+        $this->db->where('invoice.id', $invoice_id);
         $query = $this->db->get();
-        return $query->row();
+        return $query->row_array();  // Mengambil satu baris data
     }
+
 
     public function getPembayaranByInvoiceId($invoice_id)
     {

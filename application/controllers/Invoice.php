@@ -36,4 +36,13 @@ class Invoice extends CI_Controller
 
         $this->templating->load('user/data_tagihan', $data);
     }
+
+    public function detail_tagihan($invoice_id)
+    {
+        // Ambil data detail invoice berdasarkan id
+        $data['invoice'] = $this->model->getInvoiceById($invoice_id);
+        $data['judul'] = 'Detail Tagihan';
+
+        $this->templating->load('user/detail_tagihan', $data);
+    }
 }

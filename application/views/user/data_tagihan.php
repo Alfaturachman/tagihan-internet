@@ -31,17 +31,18 @@
                                 <?php foreach ($invoice as $index => $invoice_item): ?>
                                     <tr>
                                         <td><?= $index + 1; ?></td>
-                                        <td><?= $invoice_item['invoice']; ?></td>
-                                        <td><?= $invoice_item['tanggal_invoice']; ?></td>
-                                        <td>Rp. <?= number_format($invoice_item['total_harga'], 0, ',', '.'); ?></td>
-                                        <td><?= $invoice_item['status']; ?></td>
+                                        <td style="white-space: nowrap;"><?= $invoice_item['invoice']; ?></td>
+                                        <td style="white-space: nowrap;"><?= $invoice_item['tanggal_invoice']; ?></td>
+                                        <td style="white-space: nowrap;">Rp. <?= number_format($invoice_item['total_harga'], 0, ',', '.'); ?></td>
+                                        <td style="white-space: nowrap;"><?= $invoice_item['status']; ?></td>
                                         <td><?= $invoice_item['id_user'] ? $this->model->get_instansi_name($invoice_item['id_user']) : '-'; ?></td>
                                         <td><?= $invoice_item['nama_paket']; ?></td>
-                                        <td><?= date('d-m-Y', strtotime($invoice_item['tanggal_mulai'])); ?></td>
-                                        <td><?= date('d-m-Y', strtotime($invoice_item['tanggal_berakhir'])); ?></td>
+                                        <td style="white-space: nowrap;"><?= date('d-m-Y', strtotime($invoice_item['tanggal_mulai'])); ?></td>
+                                        <td style="white-space: nowrap;"><?= date('d-m-Y', strtotime($invoice_item['tanggal_berakhir'])); ?></td>
                                         <td><?= $invoice_item['id_user'] ? $this->model->get_metode_pembayaran($invoice_item['id']) : '-'; ?></td>
                                         <td><?= $invoice_item['id_user'] ? $this->model->get_upload_bukti($invoice_item['id']) : '-'; ?></td>
-                                        <td>
+                                        <td style="white-space: nowrap;">
+                                            <a href="<?= base_url('detail-tagihan/' . $invoice_item['id']); ?>" class="btn btn-info btn-sm">Detail</a>
                                             <a href="<?= base_url('cetak-invoice/' . $invoice_item['id']); ?>" class="btn btn-success btn-sm">Cetak Invoice</a>
                                         </td>
                                     </tr>
